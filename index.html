@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hex Clock</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="top-controls">
+      <div class="audio-controls">
+        <button id="togglePlay" class="control-btn paused">
+          <span class="play-icon">▶</span>
+          <span class="pause-icon">⏸</span>
+        </button>
+        <button id="toggleMute" class="control-btn">
+          <span class="volume-icon">🔊</span>
+        </button>
+        <div class="volume-control">
+          <input type="range" id="volumeSlider" min="0" max="0.2" step="0.05" value="0.02">
+        </div>
+      </div>
+      <div class="interval-control">
+        <select id="intervalSelect" class="interval-select">
+          <option value="5" selected>5m</option>
+          <option value="15">15m</option>
+          <option value="30">30m</option>
+          <option value="60">60m</option>
+        </select>
+      </div>
+    </div>
+    <div class="clock-container">
+      <div class="clock">
+        <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
+      </div>
+    </div>
+    <div id="hexCode" class="hex" title="Click to toggle between RGB and HEX">#000000</div>
+    <div class="toggle-format" id="toggleFormat">
+      <span id="rgbToggle">rgb</span> / <span id="hexToggle">hex</span>
+    </div>
+  </div>
+  <div class="gradient-ball"></div>
+  <div class="gradient-ball"></div>
+  <div class="gradient-ball"></div>
+  <audio id="backgroundAudio" loop>
+    <source src="beats.webm" type="audio/webm">
+  </audio>
+  <script src="script.js"></script>
+</body>
+
+</html>
