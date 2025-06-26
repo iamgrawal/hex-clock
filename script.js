@@ -74,6 +74,9 @@ function updateTime() {
   document.getElementById("minutes").textContent = minutes.pad(2);
   document.getElementById("seconds").textContent = seconds.pad(2);
 
+  // Update date display
+  document.getElementById("date").textContent = formatDate(now);
+
   // Update hex code display
   const hexCode =
     "#" +
@@ -112,6 +115,17 @@ function updateTime() {
     playBeep();
     lastAnnouncementTime = seconds;
   }
+}
+
+// Format date in a nice readable format
+function formatDate(date) {
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  return date.toLocaleDateString("en-US", options);
 }
 
 // Toggle between RGB and HEX display

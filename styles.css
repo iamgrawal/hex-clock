@@ -254,6 +254,38 @@ body::after {
   transform-origin: center;
 }
 
+.date-container {
+  width: 90vw;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.date {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  font-family: "Inter", Arial, sans-serif;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 2;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.date:hover {
+  opacity: 1;
+}
+
+.clock.light ~ .date-container .date {
+  color: #000;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
+}
+
 .hex {
   color: #fff;
   font-size: 1.5rem;
