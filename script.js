@@ -63,6 +63,7 @@ function updateTime() {
   const hours = now.getHours();
   const minutes = now.getMinutes();
   const seconds = now.getSeconds();
+  const milliseconds = now.getMilliseconds();
 
   // Calculate RGB values using the reference implementation's scaling
   const red = Math.round((255 / 23) * hours);
@@ -73,6 +74,7 @@ function updateTime() {
   document.getElementById("hours").textContent = hours.pad(2);
   document.getElementById("minutes").textContent = minutes.pad(2);
   document.getElementById("seconds").textContent = seconds.pad(2);
+  document.getElementById("milliseconds").textContent = milliseconds.pad(3);
 
   // Update date display
   document.getElementById("date").textContent = formatDate(now);
@@ -189,7 +191,7 @@ async function initialize() {
   attemptAutoplay();
   updateToggleFormat();
   updateTime();
-  setInterval(updateTime, 1000);
+  setInterval(updateTime, 10);
   await initAudio();
 }
 
