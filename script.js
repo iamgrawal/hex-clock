@@ -19,6 +19,7 @@ let lastAnnouncementTime = 0;
 let isMuted = false;
 let announceInterval = 5; // Default to 5 minutes
 let lastAnnouncedMinute = null;
+let lastDisplayedTime = { hours: -1, minutes: -1, seconds: -1, milliseconds: -1 };
 
 // Initialize audio context
 async function initAudio() {
@@ -65,16 +66,33 @@ function updateTime() {
   const seconds = now.getSeconds();
   const milliseconds = now.getMilliseconds();
 
+  // Only update elements that have actually changed to prevent jitter
+  if (lastDisplayedTime.hours !== hours) {
+    document.getElementById("hours").textContent = hours.pad(2);
+    lastDisplayedTime.hours = hours;
+  }
+  
+  if (lastDisplayedTime.minutes !== minutes) {
+    document.getElementById("minutes").textContent = minutes.pad(2);
+    lastDisplayedTime.minutes = minutes;
+  }
+  
+  if (lastDisplayedTime.seconds !== seconds) {
+    document.getElementById("seconds").textContent = seconds.pad(2);
+    lastDisplayedTime.seconds = seconds;
+  }
+  
+  // Always update milliseconds since they change frequently
+  const millisecondsElement = document.getElementById("milliseconds");
+  if (millisecondsElement && lastDisplayedTime.milliseconds !== milliseconds) {
+    millisecondsElement.textContent = milliseconds.pad(3);
+    lastDisplayedTime.milliseconds = milliseconds;
+  }
+
   // Calculate RGB values using the reference implementation's scaling
   const red = Math.round((255 / 23) * hours);
   const green = Math.round((255 / 59) * minutes);
   const blue = Math.round((255 / 59) * seconds);
-
-  // Update clock display
-  document.getElementById("hours").textContent = hours.pad(2);
-  document.getElementById("minutes").textContent = minutes.pad(2);
-  document.getElementById("seconds").textContent = seconds.pad(2);
-  document.getElementById("milliseconds").textContent = milliseconds.pad(3);
 
   // Update date display
   document.getElementById("date").textContent = formatDate(now);
@@ -191,7 +209,8 @@ async function initialize() {
   attemptAutoplay();
   updateToggleFormat();
   updateTime();
-  setInterval(updateTime, 10);
+  // Use 300ms interval for millisecond updates
+  setInterval(updateTime, 100);
   await initAudio();
 }
 

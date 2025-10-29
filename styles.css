@@ -233,6 +233,12 @@ body::after {
   align-items: center;
 }
 
+.clock span {
+  display: inline-block;
+  transition: none;
+  will-change: auto;
+}
+
 .clock.light {
   color: #000;
   text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.3);
@@ -242,6 +248,9 @@ body::after {
   font-size: 0.7em;
   opacity: 0.8;
   font-weight: 200;
+  font-variant-numeric: tabular-nums;
+  min-width: 2.1em;
+  text-align: center;
 }
 
 .clock::after {
